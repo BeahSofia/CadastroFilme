@@ -1,17 +1,23 @@
+/* Modo Claro */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f9;
     color: #333;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .container {
-    max-width: 800px;
+    max-width: 100%; /* Garante que a largura da página não ultrapasse os limites */
+    width: 100%;
     margin: 0 auto;
-    padding: 20px;
+    padding: 20px; /* Certifique-se de que a página tenha espaçamento suficiente */
+    box-sizing: border-box; /* Inclui o padding e border no cálculo da largura */
 }
 
 h1 {
     text-align: center;
+    font-size: 2em;
+    margin-bottom: 20px;
 }
 
 form {
@@ -22,32 +28,144 @@ form {
 
 label {
     font-weight: bold;
+    font-size: 1.1em;
 }
 
 input, select, button {
+    padding: 12px;
+    font-size: 16px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+button {
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+a {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    transition: background-color 0.3s;
+}
+
+a:hover {
+    background-color: #0056b3;
+}
+
+/* Lista de Jogos */
+#listaJogos {
+    width: 100%; /* Garante que a lista de jogos ocupe 100% da largura disponível */
+    overflow-x: auto; /* Habilita rolagem horizontal, caso necessário */
+    padding: 0;
+    margin: 0;
+}
+
+/* Jogos */
+.jogo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    width: 100%; /* Assegura que cada item não ultrapasse a largura da página */
+    box-sizing: border-box; /* Para que o padding e a borda sejam considerados dentro da largura */
+    transition: transform 0.3s;
+}
+
+/* Imagem dos Jogos */
+.jogo img {
+    max-width: 100px; /* Evita que a imagem ultrapasse o tamanho esperado */
+    height: 100px;
+    object-fit: cover;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    input, select, button {
+        font-size: 14px;
+    }
+
+    .jogo {
+        flex-direction: column; /* Alinha os itens de forma vertical em telas menores */
+        align-items: flex-start;
+        padding: 20px;
+    }
+
+    .jogo img {
+        margin-bottom: 10px;
+    }
+}
+
+/* Modo Escuro */
+body[data-theme="dark"] {
+    background-color: #121212;
+    color: #eaeaea;
+}
+
+body[data-theme="dark"] .container {
+    background-color: #1f1f1f;
+}
+
+body[data-theme="dark"] .jogo {
+    background-color: #333;
+    border: 1px solid #444;
+}
+
+body[data-theme="dark"] button {
+    background-color: #333;
+    color: #fff;
+}
+
+body[data-theme="dark"] button:hover {
+    background-color: #555;
+}
+
+body[data-theme="dark"] label {
+    color: #eaeaea;
+}
+
+body[data-theme="dark"] input, 
+body[data-theme="dark"] select {
+    background-color: #2c2c2c;
+    border: none;  /* Remover a borda */
+    color: #eaeaea;
     padding: 8px;
     font-size: 16px;
     margin-bottom: 10px;
 }
 
-button {
-    cursor: pointer;
+body[data-theme="dark"] h1 {
+    color: #eaeaea;
 }
 
-#listaJogos {
-    margin-top: 20px;
-}
-
-.jogo {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.jogo img {
-    width: 100px;
-    height: 100px;
+body[data-theme="dark"] input:focus,
+body[data-theme="dark"] select:focus {
+    outline: none;  /* Remover contorno ao focar */
+    border: none;   /* Garantir que não tenha borda */
 }

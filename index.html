@@ -3,22 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Jogos</title>
+    <title>Gestão de Jogos Virtuais</title>
     <link rel="stylesheet" href="style.css">
+    <button id="theme-toggle">Alternar Tema</button>
+    <a href="catalogo.html">Ver Catálogo</a>
 </head>
 <body>
     <div class="container">
-        <h1>Cadastro de Jogos Virtuais</h1>
+        <header>
+            <h1>Gestão de Jogos Virtuais</h1>
+        </header>
         
         <form id="formularioJogo">
             <label for="nome">Nome do Jogo:</label>
-            <input type="text" id="nome" required>
+            <input type="text" id="nome" placeholder="Digite o nome do jogo" required>
 
             <label for="link">Link de Compra:</label>
-            <input type="url" id="link" required>
+            <input type="url" id="link" placeholder="Insira o link para compra" required>
 
             <label for="valor">Valor:</label>
-            <input type="number" id="valor" required>
+            <input type="number" id="valor" placeholder="Preço em R$" required>
 
             <label for="tipo">Tipo de Jogo:</label>
             <select id="tipo">
@@ -51,13 +55,11 @@
                 <option value="Terror">Terror</option>
             </select>
 
-            <label for="foto">Foto do Jogo:</label>
-            <input type="url" id="foto" required placeholder="URL da imagem">
+            <label for="foto">Foto do Jogo (URL):</label>
+            <input type="url" id="foto" placeholder="URL da imagem" required>
 
             <button type="submit">Cadastrar Jogo</button>
         </form>
-
-        <button id="visualizarForaDaGestao">Visualizar Fora da Gestão</button>
 
         <div id="listaJogos"></div>
     </div>
