@@ -1,14 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Carregar jogos do localStorage
     const jogos = JSON.parse(localStorage.getItem('jogos')) || [];
 
-    // Mostrar os jogos no catálogo
     mostrarCatalogo(jogos);
 });
 
 function mostrarCatalogo(jogos) {
     const listaJogos = document.getElementById('listaJogos');
-    listaJogos.innerHTML = ''; // Limpa a lista antes de atualizá-la
+    listaJogos.innerHTML = '';
 
     jogos.forEach((jogo) => {
         const jogoDiv = document.createElement('div');
@@ -24,7 +22,6 @@ function mostrarCatalogo(jogos) {
     });
 }
 
-// Alternar entre Modo Claro e Modo Escuro
 function toggleTheme() {
     const currentTheme = document.body.getAttribute('data-theme');
     if (currentTheme === 'dark') {
@@ -34,6 +31,5 @@ function toggleTheme() {
     }
 }
 
-// Adicionando o evento de clique ao botão de troca de tema
 const themeToggleButton = document.getElementById('theme-toggle');
 themeToggleButton.addEventListener('click', toggleTheme);
