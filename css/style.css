@@ -7,11 +7,11 @@ body {
 }
 
 .container {
-    max-width: 100%; /* Garante que a largura da página não ultrapasse os limites */
+    max-width: 100%;
     width: 100%;
     margin: 0 auto;
-    padding: 20px; /* Certifique-se de que a página tenha espaçamento suficiente */
-    box-sizing: border-box; /* Inclui o padding e border no cálculo da largura */
+    padding: 20px;
+    box-sizing: border-box; 
 }
 
 h1 {
@@ -69,8 +69,8 @@ a:hover {
 
 /* Lista de Jogos */
 #listaJogos {
-    width: 100%; /* Garante que a lista de jogos ocupe 100% da largura disponível */
-    overflow-x: auto; /* Habilita rolagem horizontal, caso necessário */
+    display: flex;
+    flex-direction: column; /* Organiza os jogos na vertical */
     padding: 0;
     margin: 0;
 }
@@ -78,23 +78,61 @@ a:hover {
 /* Jogos */
 .jogo {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-    padding: 10px;
+    flex-direction: row; /* Organiza as informações na horizontal */
+    align-items: center; /* Alinha os itens verticalmente */
+    justify-content: space-between; /* Distribui os itens horizontalmente */
+    margin-bottom: 20px; /* Espaço entre os jogos */
+    padding: 15px;
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 10px;
-    width: 100%; /* Assegura que cada item não ultrapasse a largura da página */
-    box-sizing: border-box; /* Para que o padding e a borda sejam considerados dentro da largura */
+    width: 100%; /* Garante que os itens ocupem toda a largura disponível */
+    box-sizing: border-box;
     transition: transform 0.3s;
+    min-height: 120px; /* Altura mínima fixa */
 }
 
 /* Imagem dos Jogos */
 .jogo img {
-    max-width: 100px; /* Evita que a imagem ultrapasse o tamanho esperado */
+    max-width: 100px; /* Tamanho da imagem */
     height: 100px;
     object-fit: cover;
+    margin-right: 20px; /* Espaçamento entre a imagem e o texto */
+}
+
+/* Título do Jogo */
+.jogo .titulo {
+    font-weight: bold;
+    font-size: 1.1em;
+    flex-grow: 1; /* Faz com que o título ocupe o espaço restante */
+    margin-right: 20px;
+    text-align: left;
+    white-space: normal; /* Permite quebras de linha */
+    word-wrap: break-word; /* Quebra a palavra se necessário */
+    max-width: 250px; /* Limita o tamanho máximo do título */
+}
+
+/* Descrição do Jogo */
+.jogo .descricao {
+    font-size: 0.9em;
+    color: #666;
+    margin-right: 20px;
+    flex-grow: 1;
+    text-align: left;
+}
+
+/* Preço do Jogo */
+.jogo .preco {
+    font-weight: bold;
+    margin-right: 20px;
+    flex-grow: 0;
+    text-align: right;
+}
+
+/* Botão de Compra */
+.jogo .botao-compra {
+    margin-left: 10px;
+    text-align: center;
 }
 
 /* Responsividade */
@@ -111,14 +149,24 @@ a:hover {
         font-size: 14px;
     }
 
+    #listaJogos {
+        flex-direction: column; /* Lista vertical */
+        align-items: center;
+    }
+
     .jogo {
-        flex-direction: column; /* Alinha os itens de forma vertical em telas menores */
-        align-items: flex-start;
-        padding: 20px;
+        width: 100%; /* Faz os jogos ocuparem toda a largura em telas pequenas */
+        flex-direction: column; /* Organiza os itens na vertical em telas pequenas */
+        height: auto; /* Altura automática em telas pequenas */
     }
 
     .jogo img {
-        margin-bottom: 10px;
+        margin-bottom: 10px; /* Espaçamento entre imagem e o resto dos detalhes */
+    }
+
+    .jogo .titulo, .jogo .descricao, .jogo .preco, .jogo .botao-compra {
+        margin-right: 0; /* Remove o espaçamento à direita em telas pequenas */
+        margin-bottom: 10px; /* Adiciona espaçamento entre as informações */
     }
 }
 
@@ -153,7 +201,7 @@ body[data-theme="dark"] label {
 body[data-theme="dark"] input, 
 body[data-theme="dark"] select {
     background-color: #2c2c2c;
-    border: none;  /* Remover a borda */
+    border: none; 
     color: #eaeaea;
     padding: 8px;
     font-size: 16px;
@@ -166,6 +214,6 @@ body[data-theme="dark"] h1 {
 
 body[data-theme="dark"] input:focus,
 body[data-theme="dark"] select:focus {
-    outline: none;  /* Remover contorno ao focar */
-    border: none;   /* Garantir que não tenha borda */
+    outline: none;  
+    border: none;   
 }
