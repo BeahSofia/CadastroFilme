@@ -1,81 +1,95 @@
-class Jogo {
-    constructor(nome, link, preco, tipo, imagem) {
-        this.nome = nome;
-        this.link = link;
-        this.preco = preco;
-        this.tipo = tipo;
-        this.imagem = imagem;
-    }
-}
-
-const jogos = [];
+let jogos = [];
 
 function adicionarJogo() {
     const nome = document.getElementById("nome").value;
     const link = document.getElementById("link").value;
-    const preco = document.getElementById("preco").value;
+    const valor = document.getElementById("valor").value;
     const tipo = document.getElementById("tipo").value;
-    const imagem = document.getElementById("imagem").value;
+    const foto = document.getElementById("foto").value;
 
-    const novoJogo = new Jogo(nome, link, preco, tipo, imagem);
+    const novoJogo = {
+        nome,
+        link,
+        valor,
+        tipo,
+        foto
+    };
+
     jogos.push(novoJogo);
-
-    exibirJogos();
-    limparFormulario();
-}
-
-function exibirJogos() {
-    const listaJogos = document.getElementById("listaJogos");
-    listaJogos.innerHTML = "";
-
-    jogos.forEach((jogo, indice) => {
-        const itemJogo = document.createElement("div");
-        itemJogo.classList.add("item-jogo");
-
-        itemJogo.innerHTML = `
-            <h3>${jogo.nome}</h3>
-            <p>Tipo: ${jogo.tipo}</p>
-            <p>Valor: R$${jogo.preco}</p>
-            <a href="${jogo.link}" target="_blank">Comprar</a>
-            <img src="${jogo.imagem}" alt="Imagem do jogo" width="100">
-            <button onclick="editarJogo(${indice})">Editar</button>
-            <button onclick="deletarJogo(${indice})">Deletar</button>
-        `;
-
-        listaJogos.appendChild(itemJogo);
-    });
-}
-
-function limparFormulario() {
+    atualizarLista();
     document.getElementById("formularioJogo").reset();
 }
 
-function deletarJogo(indice) {
-    jogos.splice(indice, 1);
-    exibirJogos();
+function atualizarLista() {
+    const listaJogos = document.getElementById("listaJogos");
+    listaJogos.innerHTML = "";
+
+    jogos.forEach((jogo, index) => {
+        const jogoDiv = document.createElement("div");
+        jogoDiv.classList.add("jogo");
+
+        jogoDiv.innerHTML = `
+            <div>
+                <h2>${jogo.nome}</h2>
+                <p><strong>Link:</strong> <a href="${jogo.link}" target="_blank">${jogo.link}</a></p>
+                <p><strong>Valor:</strong> R$${jogo.valor}</p>
+                <p><strong>Tipo:</strong> ${jogo.tipo}</p>
+            </div>
+            <div>
+                <img src="${jogo.foto}" alt="Foto do jogo">
+                <button onclick="editarJogo(${index})">Editar</button>
+                <button onclick="excluirJogo(${index})">Excluir</button>
+            </div>
+        `;
+
+        listaJogos.appendChild(jogoDiv);
+    });
 }
 
-function editarJogo(indice) {
-    const jogo = jogos[indice];
+function editarJogo(index) {
+    const jogo = jogos[index];
+
     document.getElementById("nome").value = jogo.nome;
     document.getElementById("link").value = jogo.link;
-    document.getElementById("preco").value = jogo.preco;
+    document.getElementById("valor").value = jogo.valor;
     document.getElementById("tipo").value = jogo.tipo;
-    document.getElementById("imagem").value = jogo.imagem;
+    document.getElementById("foto").value = jogo.foto;
 
-    jogos.splice(indice, 1); // Remove o jogo original para atualização
-    exibirJogos();
+    excluirJogo(index);
 }
 
-let emVisualizacaoGestao = true;
+function excluirJogo(index) {
+    jogos.splice(index, 1);
+    atualizarLista();
+}
 
 function alternarVisualizacao() {
-    emVisualizacaoGestao = !emVisualizacaoGestao;
+    const novaPagina = window.open("", "_blank");
+    novaPagina.document.write("<html><head><title>Lista de Jogos</title></head><body>");
+    novaPagina.document.write("<h1>Lista de Jogos Cadastrados</h1>");
 
-    if (emVisualizacaoGestao) {
-        document.body.style.backgroundColor = "#f4f4f9";
-    } else {
-        document.body.style.backgroundColor = "#e2e8f0";
-        alert("Visualizando fora da gestão!");
-    }
+    jogos.forEach(jogo => {
+        novaPagina.document.write(`
+            <div>
+                <h2>${jogo.nome}</h2>
+                <p><strong>Link:</strong> <a href="${jogo.link}" target="_blank">${jogo.link}</a></p>
+                <p><strong>Valor:</strong> R$${jogo.valor}</p>
+                <p><strong>Tipo:</strong> ${jogo.tipo}</p>
+                <img src="${jogo.foto}" alt="Foto do jogo" style="width: 150px; height: 150px;">
+                <hr>
+            </div>
+        `);
+    });
+
+    novaPagina.document.write("</body></html>");
+    novaPagina.document.close();
 }
+
+document.getElementById("formularioJogo").addEventListener("submit", function(event) {
+    event.preventDefault();
+    adicionarJogo();
+});
+
+document.getElementById("visualizarForaDaGestao").addEventListener("click", function() {
+    alternarVisualizacao();
+});

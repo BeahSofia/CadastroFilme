@@ -8,18 +8,19 @@
 </head>
 <body>
     <div class="container">
-        <h1>Gestão de Cadastro de Jogos</h1>
+        <h1>Cadastro de Jogos Virtuais</h1>
+        
         <form id="formularioJogo">
             <label for="nome">Nome do Jogo:</label>
             <input type="text" id="nome" required>
 
-            <label for="link">Link para Compra:</label>
+            <label for="link">Link de Compra:</label>
             <input type="url" id="link" required>
 
-            <label for="preco">Valor:</label>
-            <input type="number" id="preco" required>
+            <label for="valor">Valor:</label>
+            <input type="number" id="valor" required>
 
-            <label for="tipo">Tipo do Jogo:</label>
+            <label for="tipo">Tipo de Jogo:</label>
             <select id="tipo">
                 <option value="Ação">Ação</option>
                 <option value="Arcade">Arcade</option>
@@ -50,18 +51,17 @@
                 <option value="Terror">Terror</option>
             </select>
 
-            <label for="imagem">Foto do Jogo:</label>
-            <input type="url" id="imagem" placeholder="URL da imagem" required>
+            <label for="foto">Foto do Jogo:</label>
+            <input type="url" id="foto" required placeholder="URL da imagem">
 
-            <button type="button" onclick="adicionarJogo()">Cadastrar Jogo</button>
+            <button type="submit">Cadastrar Jogo</button>
         </form>
 
-        <h2>Lista de Jogos</h2>
-        <div id="listaJogos"></div>
+        <button id="visualizarForaDaGestao">Visualizar Fora da Gestão</button>
 
-        <button onclick="alternarVisualizacao()">Visualizar Fora da Gestão</button>
+        <div id="listaJogos"></div>
     </div>
 
-    <script src="style.css"></script>
+    <script src="script.js"></script>
 </body>
 </html>
